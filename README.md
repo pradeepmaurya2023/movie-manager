@@ -1,7 +1,5 @@
 ## MovieHub - Movie Manager
 
-#### Example:
-
 MovieHub
 
 An application used to filter data from IMDB api based on user preference, built with `React`, `Redux`, `JavaScript`, and `Tailwind CSS`.
@@ -14,15 +12,11 @@ This project is currently in development. Users can filter Movies and Web Series
 
 ## Project Screen Shot(s)
 
-#### Example:   
-
 [ PRETEND SCREEN SHOT IS HERE ]
 
 [ PRETEND OTHER SCREEN SHOT IS HERE ]
 
 ## Installation and Setup Instructions
-
-#### Example:  
 
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 
