@@ -1,45 +1,21 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { LuExternalLink } from "react-icons/lu";
 
 // redux 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setContent } from "../features/content/contentData";
+import { setLoader } from "../features/loader/loaderData";
 
 const Suggestions = (props) => {
   const reference = props.reference;
 
-  // to store movie id
-  // const [movie, setMovie] = useState('')
-
-  // to store whole movie info
-  // const [movieInfo, setMovieInfo] = useState({})
-
-  // redux to store whole movie info
-  const contentData = useSelector((state)=> state.content.value)
   const dispatch = useDispatch()
 
-
-  // useEffect(()=>{
-  //   console.log(movie)
-  // },[movie])
-
-  // useEffect(()=>{
-  //   console.log(movieInfo)
-  // },[movieInfo])
-
-  useEffect(()=>{
-    console.log('Redux setted')
-    console.log(contentData)
-  },[contentData])
-
   const fetchData = async (id) => {
-    props.setLoad(true)
+    dispatch(setLoader(true))
     let req = await fetch(`https://search.imdbot.workers.dev/?tt=${id}`);
     let data = await req.json();
-    props.setLoad(false)
-    // setMovie(data["main"]["id"])
-    // setMovieInfo({...data})
+    dispatch(setLoader(false))
     dispatch(setContent(data))
   };
 
@@ -48,10 +24,7 @@ const Suggestions = (props) => {
     fetchData(id)
     props.setInputValue('');
     props.setSuggestions([])
-    // console.log(contentData)
   }
-
-
 
   return (
     <>

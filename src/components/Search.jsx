@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Suggestions from "./Suggestions";
+import { MdOutlineSearch } from "react-icons/md";
+
+// Adding Redux
+import { useDispatch } from "react-redux";
+import { setLoader } from "../features/loader/loaderData";
 
 const Search = () => {
   // store input value state ❗❗❗❗❗
   const [inputValue, setInputValue] = useState("");
 
-  // handles loading animation when data is fetching ❗❗❗❗❗
-  const [load, setLoad] = useState(false);
+  // redux dispatch
+  const dispatch = useDispatch();
 
   // stores 5 suggestions for user ❗❗❗❗❗
-  const [suggestions, setSuggestions] = useState([])
-
+  const [suggestions, setSuggestions] = useState([]);
 
   // fetching data using API by passing name ❗❗❗❗❗
   const fetchData = async (name) => {
-    setLoad(true)
+    dispatch(setLoader(true));
     let req = await fetch(`https://search.imdbot.workers.dev/?q=${name}`);
     let data = await req.json();
-    // console.log(data.description);
     let suggested = Array.from(data.description);
-    suggested = suggested.slice(0,5);
-    // console.log(suggested)
-    setSuggestions([...suggested])
-    // console.log(suggestions)
-    setLoad(false)
+    suggested = suggested.slice(0, 5);
+    setSuggestions([...suggested]);
+    dispatch(setLoader(false));
   };
 
   // handling input element values and fetching data if there are more than 3 letters in input box ❗❗❗❗❗
@@ -31,19 +32,16 @@ const Search = () => {
     let searchData = e.target.value;
     setInputValue(searchData);
     if (searchData.length > 3) {
-      // console.log(searchData);
       fetchData(searchData);
-    }else{
-      setSuggestions([])
+    } else {
+      setSuggestions([]);
     }
   };
 
   return (
     <>
       <div className="w-full h-40 text-xl py-20 font-cursive relative flex flex-col items-center">
-
-        {/* faking a loading animation whenever any data is fetching ❗❗❗❗❗ */} 
-        {load && <p className="text-white text-center">Loading...</p>}
+        {/* faking a loading animation whenever any data is fetching ❗❗❗❗❗ */}
         <div className="w-full flex justify-center">
           <div className="w-1/3 flex flex-col bg-white  rounded-l-md rounded-br-md relative">
             <input
@@ -54,15 +52,17 @@ const Search = () => {
               placeholder="Search Movies..."
             />
 
-            {/* if suggestions state has some value than this code will work and add component ❗❗❗❗❗*/}  
-            {suggestions.length>0 && <Suggestions setInputValue={setInputValue} reference={suggestions} setSuggestions={setSuggestions} setLoad={setLoad} />}
-            
+            {/* if suggestions state has some value than this code will work and add component ❗❗❗❗❗*/}
+            {suggestions.length > 0 && (
+              <Suggestions
+                setInputValue={setInputValue}
+                reference={suggestions}
+                setSuggestions={setSuggestions}
+              />
+            )}
           </div>
-          <button
-            // onClick={handleSubmit}
-            className="h-14 bg-yellow-400 px-7 rounded-r-md font-bold text-2xl"
-          >
-            Search
+          <button className="h-14 bg-yellow-400 px-7 rounded-r-md">
+            <MdOutlineSearch className=" text-4xl " />
           </button>
         </div>
       </div>
