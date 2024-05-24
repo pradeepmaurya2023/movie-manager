@@ -22,7 +22,7 @@ const Search = () => {
     suggested = suggested.slice(0,5);
     // console.log(suggested)
     setSuggestions([...suggested])
-    console.log(suggestions)
+    // console.log(suggestions)
     setLoad(false)
   };
 
@@ -55,7 +55,7 @@ const Search = () => {
             />
 
             {/* if suggestions state has some value than this code will work and add component ❗❗❗❗❗*/}  
-            {suggestions.length>0 && <Suggestions reference={suggestions}setLoad={setLoad} />}
+            {suggestions.length>0 && <Suggestions setInputValue={setInputValue} reference={suggestions} setSuggestions={setSuggestions} setLoad={setLoad} />}
             
           </div>
           <button

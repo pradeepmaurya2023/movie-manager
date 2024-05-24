@@ -1,0 +1,12 @@
+App
+    Navbar
+    search
+        Suggestions
+    MovieContainer
+        header
+            title
+            rating
+        MovieCard
+            MovieDetails
+                genre
+        cast
