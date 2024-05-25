@@ -4,6 +4,7 @@ import MovieDetails from "./movieInfo/MovieDetails";
 
 // redux
 import { useSelector } from "react-redux";
+import Cast from "./movieInfo/Cast";
 
 const MovieContainer = () => {
   // redux to fetch whole movie info
@@ -22,6 +23,7 @@ const MovieContainer = () => {
         {/* Main conatainer having poster and info */}
         <MovieDetails />
       </div>
+      <Cast />
     </div>
   );
 };

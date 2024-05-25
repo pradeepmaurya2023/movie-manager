@@ -67,7 +67,7 @@ const Search = () => {
           {/* <div className="bg-white flex items-center px-2">
           <AiOutlineLoading3Quarters />
           </div> */}
-          <button className="h-14 bg-yellow-400 px-7 rounded-r-md">
+          <button className="h-14 bg-yellow-400 px-7 rounded-r-md cursor-pointer" disabled>
             <MdOutlineSearch className=" text-4xl " />
           </button>
         </div>
